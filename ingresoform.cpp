@@ -21,7 +21,7 @@ void IngresoForm::setProductos(QList<Productos *> &newProducto)
     m_productos = &newProducto;
 }
 
-void IngresoForm::cargarAsignaturas()
+void IngresoForm::cargarProductos()
 {
     ui->cmbProductos->clear();
     foreach(Productos *p, *m_productos)

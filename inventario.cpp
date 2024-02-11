@@ -25,7 +25,7 @@ float Inventario::calcularCosto(QString SKU, float nuevoCosto, float nuevaUnidad
     return 0;
 }
 
-void Inventario::calcularEgreso(QString SKU, float nuevaUnidad)
+float Inventario::calcularEgreso(QString SKU, float nuevaUnidad)
 {
     foreach (Productos *p, m_productos)
     {
@@ -33,11 +33,13 @@ void Inventario::calcularEgreso(QString SKU, float nuevaUnidad)
         {
             if(p->existencias() >= nuevaUnidad)
             {
-                p->setExistencias(p->existencias() - nuevaUnidad);
+                float total = p->existencias() - nuevaUnidad;
+                p->setExistencias(total);
+                return total;
             }
         }
     }
-    return;
+    return 0;
 }
 
 QList<Productos *> Inventario::obtenerProductos()

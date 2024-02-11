@@ -4,11 +4,10 @@
 #include <QMainWindow>
 #include <QMdiSubWindow>
 #include <QDebug>
-// #include <productos.h>
-// #include <inventario.h>
 
 #include <nuevoproductoform.h>
 #include <ingresoform.h>
+#include <egresoform.h>
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class Interfaz; }
@@ -30,6 +29,8 @@ private slots:
     void on_productoAgregado(QString sku, QString nombre, double precioCompra, int existencias);
     void on_actionIngreso_triggered();
     void on_productoSeleccionado(Productos *producto);
+
+    void on_actionEgreso_triggered();
 
 private:
     Ui::Interfaz *ui;

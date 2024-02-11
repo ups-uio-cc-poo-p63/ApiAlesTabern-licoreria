@@ -74,7 +74,7 @@ void Interfaz::on_actionIngreso_triggered()
     IngresoForm *w = new IngresoForm(this);
     w->setProductos(m_productos);
     w->setInventario(inventario);
-    w->cargarAsignaturas();
+    w->cargarProductos();
 
     connect(w, SIGNAL(productoSeleccionado(Productos*)), this, SLOT(on_productoSeleccionado(Productos*)));
 
@@ -85,3 +85,15 @@ void Interfaz::on_productoSeleccionado(Productos *producto)
 {
     actualizarTabla();
 }
+
+void Interfaz::on_actionEgreso_triggered()
+{
+    EgresoForm *w = new EgresoForm(this);
+    w->setProductos(m_productos);
+    w->setInventario(inventario);
+    w->cargarProductos();
+    connect(w, SIGNAL(productoSeleccionado(Productos*)), this, SLOT(on_productoSeleccionado(Productos*)));
+
+    w->show();
+}
+

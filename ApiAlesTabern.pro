@@ -9,6 +9,7 @@ CONFIG += c++11
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
+    egresoform.cpp \
     ingresoform.cpp \
     inventario.cpp \
     main.cpp \
@@ -17,6 +18,7 @@ SOURCES += \
     productos.cpp
 
 HEADERS += \
+    egresoform.h \
     ingresoform.h \
     interfaz.h \
     inventario.h \
@@ -24,6 +26,7 @@ HEADERS += \
     productos.h
 
 FORMS += \
+    egresoform.ui \
     ingresoform.ui \
     interfaz.ui \
     nuevoproductoform.ui
