@@ -9,7 +9,7 @@ Interfaz::Interfaz(QWidget *parent)
     QStringList tituloTemas;
     tituloTemas << "SKU" << "Nombre" << "Precio Compra" << "Existencias";
     ui->tblDatos->setHorizontalHeaderLabels(tituloTemas);
-    inventario = new Inventario();  // Inicializar el inventario
+    inventario = new Inventario();
     //datosPrueba();
 }
 
@@ -35,7 +35,7 @@ void Interfaz::actualizarTabla()
     {
         QString sku = producto->SKU();
         QString nombre = producto->nombre();
-        QString precioCompra = QString::number(producto->precioCompra());
+        QString precioCompra = QString::number(producto->precioCompra(), 'f', 2);
         QString existencias = QString::number(producto->existencias());
 
         int fila = ui->tblDatos->rowCount();
@@ -73,6 +73,15 @@ void Interfaz::on_actionIngreso_triggered()
 {
     IngresoForm *w = new IngresoForm(this);
     w->setProductos(m_productos);
+    w->setInventario(inventario);
     w->cargarAsignaturas();
+
+    connect(w, SIGNAL(productoSeleccionado(Productos*)), this, SLOT(on_productoSeleccionado(Productos*)));
+
     w->show();
+}
+
+void Interfaz::on_productoSeleccionado(Productos *producto)
+{
+    actualizarTabla();
 }

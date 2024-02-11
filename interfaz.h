@@ -29,6 +29,7 @@ private slots:
     void on_actionNuevo_Producto_triggered();
     void on_productoAgregado(QString sku, QString nombre, double precioCompra, int existencias);
     void on_actionIngreso_triggered();
+    void on_productoSeleccionado(Productos *producto);
 
 private:
     Ui::Interfaz *ui;

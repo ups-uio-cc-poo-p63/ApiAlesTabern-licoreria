@@ -10,7 +10,7 @@ class Inventario
 public:
     Inventario();
     void agregarProductos(Productos *nuevoProducto);
-    void calcularCosto(QString SKU, float nuevoCosto, float nuevaUnidad);
+    float calcularCosto(QString SKU, float nuevoCosto, float nuevaUnidad);
     void calcularEgreso(QString SKU, float nuevaUnidad);
     QList<Productos*> obtenerProductos();
 private:

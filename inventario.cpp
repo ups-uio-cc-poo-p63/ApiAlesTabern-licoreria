@@ -10,19 +10,19 @@ void Inventario::agregarProductos(Productos *nuevoProducto)
     m_productos.append(nuevoProducto);
 }
 
-void Inventario::calcularCosto(QString SKU, float nuevoCosto, float nuevaUnidad)
+float Inventario::calcularCosto(QString SKU, float nuevoCosto, float nuevaUnidad)
 {
     foreach (Productos *p, m_productos)
     {
-        if(p->SKU() == SKU)
+        if (p->SKU() == SKU)
         {
-            float nuevoCosto;
-            nuevoCosto = ((p->precioCompra() * p->existencias()) +(nuevoCosto * nuevaUnidad)) /( p->existencias() + nuevaUnidad);
-            p->setPrecioCompra(nuevoCosto);
-            p->setExistencias(p->existencias() + nuevaUnidad);
+
+            nuevoCosto = ((p->precioCompra() * p->existencias()) + (nuevoCosto * nuevaUnidad)) / (p->existencias() + nuevaUnidad);
+            float total = nuevoCosto;
+            return total;
         }
     }
-    return;
+    return 0;
 }
 
 void Inventario::calcularEgreso(QString SKU, float nuevaUnidad)
@@ -35,9 +35,7 @@ void Inventario::calcularEgreso(QString SKU, float nuevaUnidad)
             {
                 p->setExistencias(p->existencias() - nuevaUnidad);
             }
-            return;
         }
-        return;
     }
     return;
 }
