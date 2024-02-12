@@ -5,18 +5,19 @@ Interfaz::Interfaz(QWidget *parent)
     : QMainWindow(parent), ui(new Ui::Interfaz)
 {
     ui->setupUi(this);
+
     ui->tblDatos->setColumnCount(4);
     QStringList tituloTemas;
     tituloTemas << "SKU" << "Nombre" << "Precio Compra" << "Existencias";
     ui->tblDatos->setHorizontalHeaderLabels(tituloTemas);
     inventario = new Inventario();
-    //datosPrueba();
+    datosQuemados();
+    cargar();
 }
 
 Interfaz::~Interfaz()
 {
     delete ui;
-    delete inventario;
 }
 
 void Interfaz::cargarDatos()
@@ -30,8 +31,7 @@ void Interfaz::actualizarTabla()
 
     QList<Productos*> productos = inventario->obtenerProductos();
 
-    // Recorre la lista de productos y agrega cada producto a la tabla
-    foreach (Productos *producto, productos)
+    foreach (Productos *producto, m_productos)
     {
         QString sku = producto->SKU();
         QString nombre = producto->nombre();
@@ -60,7 +60,6 @@ void Interfaz::on_productoAgregado(QString sku, QString nombre, double precioCom
     Productos *nuevoProducto = new Productos(sku, nombre, precioCompra, existencias);
     m_productos.append(nuevoProducto);
     inventario->agregarProductos(nuevoProducto);
-
     actualizarTabla();
 }
 
@@ -74,6 +73,7 @@ void Interfaz::on_actionIngreso_triggered()
     IngresoForm *w = new IngresoForm(this);
     w->setProductos(m_productos);
     w->setInventario(inventario);
+    w->setBitacoraForm(m_bitacoraForm);
     w->cargarProductos();
 
     connect(w, SIGNAL(productoSeleccionado(Productos*)), this, SLOT(on_productoSeleccionado(Productos*)));
@@ -92,8 +92,120 @@ void Interfaz::on_actionEgreso_triggered()
     w->setProductos(m_productos);
     w->setInventario(inventario);
     w->cargarProductos();
+
     connect(w, SIGNAL(productoSeleccionado(Productos*)), this, SLOT(on_productoSeleccionado(Productos*)));
 
     w->show();
+}
+
+
+void Interfaz::on_actionBitacora_triggered()
+{
+    BitacoraForm *w = new BitacoraForm(this);
+    w->show();
+}
+
+void Interfaz::datosQuemados()
+{
+    Productos *p1 = new Productos("SKU-1", "Pilsener", 5.00, 10);
+    Productos *p2 = new Productos("SKU-2", "Corona", 20.00, 20);
+    Productos *p3 = new Productos("SKU-3", "Club", 10.00, 30);
+    Productos *p4 = new Productos("SKU-4", "Blue Label", 40.00, 35);
+
+    m_productos.append(p1);
+    m_productos.append(p2);
+    m_productos.append(p3);
+    m_productos.append(p4);
+
+}
+
+void Interfaz::setBitacoraForm(BitacoraForm *newBitacoraForm)
+{
+    m_bitacoraForm = newBitacoraForm;
+}
+
+void Interfaz::guardar()
+{
+    QString rutaArchivo = QFileDialog::getSaveFileName(this, tr("Guardar Datos"), QDir::homePath(), tr("Archivos CSV (*.csv)"));
+
+    if (!rutaArchivo.isEmpty())
+    {
+        QFile archivo(rutaArchivo);
+
+        if (archivo.open(QIODevice::WriteOnly | QIODevice::Text))
+        {
+            QTextStream salida(&archivo);
+
+            // Escribir encabezados
+            salida << tr("SKU,Nombre,PrecioCompra,Existencias\n");
+
+            // Escribir datos
+            foreach (Productos *producto, m_productos)
+            {
+                salida << producto->SKU() << ","
+                       << producto->nombre() << ","
+                       << producto->precioCompra() << ","
+                       << producto->existencias() << "\n";
+            }
+
+            archivo.close();
+        }
+        else
+        {
+            QMessageBox::warning(this, tr("Guardar Datos"), tr("No se pudo guardar los datos"));
+        }
+    }
+}
+
+void Interfaz::cargar()
+{
+    QString rutaArchivo = QFileDialog::getOpenFileName(this, tr("Cargar Datos"), QDir::homePath(), tr("Archivos CSV (*.csv)"));
+
+    if (!rutaArchivo.isEmpty())
+    {
+        QFile archivo(rutaArchivo);
+
+        if (archivo.open(QIODevice::ReadOnly | QIODevice::Text))
+        {
+            QTextStream entrada(&archivo);
+            entrada.readLine();
+            m_productos.clear();
+
+            while (!entrada.atEnd())
+            {
+                QString linea = entrada.readLine();
+                QStringList campos = linea.split(',');
+
+                if (campos.size() == 4)
+                {
+                    QString sku = campos[0];
+                    QString nombre = campos[1];
+                    double precioCompra = campos[2].toDouble();
+                    int existencias = campos[3].toInt();
+
+                    Productos *producto = new Productos(sku, nombre, precioCompra, existencias);
+                    m_productos.append(producto);
+                }
+            }
+            datosQuemados();
+            actualizarTabla();
+            archivo.close();
+        }
+        else
+        {
+            QMessageBox::warning(this, tr("Cargar Datos"), tr("No se pudo abrir el archivo"));
+        }
+    }
+}
+
+void Interfaz::on_pushButton_released()
+{
+    guardar();
+}
+
+
+void Interfaz::on_pushButton_2_released()
+{
+    cargar();
 }
 

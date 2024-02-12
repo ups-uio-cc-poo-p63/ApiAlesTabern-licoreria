@@ -4,10 +4,16 @@
 #include <QMainWindow>
 #include <QMdiSubWindow>
 #include <QDebug>
+#include <QDir>
+#include <QFileDialog>
+#include <QCoreApplication>
+#include <QFile>
+#include <QTextStream>
 
 #include <nuevoproductoform.h>
 #include <ingresoform.h>
 #include <egresoform.h>
+#include <bitacoraform.h>
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class Interfaz; }
@@ -22,6 +28,10 @@ public:
     ~Interfaz();
     void cargarDatos();
     QList<Productos*>& obtenerListaProductos();
+    void setBitacoraForm(BitacoraForm *newBitacoraForm);
+    void guardar();
+    void cargar();
+
 public slots:
     void actualizarTabla();
 private slots:
@@ -32,13 +42,23 @@ private slots:
 
     void on_actionEgreso_triggered();
 
+    void on_actionBitacora_triggered();
+
+    void on_pushButton_released();
+
+    void on_pushButton_2_released();
+
 private:
     Ui::Interfaz *ui;
 
-    void cargarSubVentana(QWidget *ventana);
-    void datosPrueba();
     Inventario *inventario;
     QList<Productos*> m_productos;
+    BitacoraForm *m_bitacoraForm;
+
+    void datosQuemados();
+
+    QString m_path;
+    QString m_archivo;
     enum Columna
     {
         SKU, NOMBRE, PRECIOCOMPRA, EXISTENCIAS

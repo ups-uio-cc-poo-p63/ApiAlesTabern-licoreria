@@ -15,7 +15,34 @@
   </property>
   <widget class="QWidget" name="centralwidget">
    <layout class="QGridLayout" name="gridLayout">
-    <item row="0" column="0">
+    <item row="1" column="1">
+     <spacer name="horizontalSpacer">
+      <property name="orientation">
+       <enum>Qt::Horizontal</enum>
+      </property>
+      <property name="sizeHint" stdset="0">
+       <size>
+        <width>40</width>
+        <height>20</height>
+       </size>
+      </property>
+     </spacer>
+    </item>
+    <item row="1" column="0">
+     <widget class="QPushButton" name="pushButton">
+      <property name="text">
+       <string>Guardar</string>
+      </property>
+     </widget>
+    </item>
+    <item row="1" column="2">
+     <widget class="QPushButton" name="pushButton_2">
+      <property name="text">
+       <string>Cargar Nuevo</string>
+      </property>
+     </widget>
+    </item>
+    <item row="0" column="0" colspan="3">
      <widget class="QTableWidget" name="tblDatos">
       <property name="enabled">
        <bool>true</bool>
@@ -43,13 +70,14 @@
     <addaction name="separator"/>
     <addaction name="actionSalir"/>
    </widget>
-   <widget class="QMenu" name="menuGrafica">
+   <widget class="QMenu" name="menuKardex">
     <property name="title">
-     <string>Grafica</string>
+     <string>Kardex</string>
     </property>
+    <addaction name="actionBitacora"/>
    </widget>
    <addaction name="menuArchivo"/>
-   <addaction name="menuGrafica"/>
+   <addaction name="menuKardex"/>
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
   <action name="actionNuevo_Producto">
@@ -79,6 +107,17 @@
   <action name="actionSalir">
    <property name="text">
     <string>Salir</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+Q</string>
+   </property>
+  </action>
+  <action name="actionBitacora">
+   <property name="text">
+    <string>&amp;Bitacora</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+B</string>
    </property>
   </action>
  </widget>

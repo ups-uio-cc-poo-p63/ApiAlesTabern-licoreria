@@ -58,8 +58,12 @@ void IngresoForm::on_buttonBox_accepted()
         float nuevoPrecioCompra = m_inventario->calcularCosto(m_producto->SKU(), precioCompra, nuevasUnidades);
         m_producto->setExistencias(m_producto->existencias() + nuevasUnidades);
         m_producto->setPrecioCompra(nuevoPrecioCompra);
+        qDebug() << "sigue aqui";
+        QDateTime fechaAccion = QDateTime::currentDateTime();
+        QString fecha = fechaAccion.toString("yyyy-MM-dd hh:mm:ss");
 
         emit productoSeleccionado(m_producto);
+        emit enviarDatosBitacora(fechaAccion, "Ingreso", nuevasUnidades, m_producto->nombre(), nuevoPrecioCompra, m_producto->existencias());
 
         this->close();
     }
@@ -86,9 +90,13 @@ void IngresoForm::setInventario(Inventario *newInventario)
     m_inventario = newInventario;
 }
 
-
 void IngresoForm::on_buttonBox_rejected()
 {
     this->close();
+}
+
+void IngresoForm::setBitacoraForm(BitacoraForm *newBitacoraForm)
+{
+    m_bitacoraForm = newBitacoraForm;
 }
 

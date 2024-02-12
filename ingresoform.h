@@ -5,8 +5,10 @@
 #include <QVector>
 #include <QDialog>
 #include <QMessageBox>
+#include <QDateTime>
 
 #include <nuevoproductoform.h>
+#include <bitacoraform.h>
 
 #include <inventario.h>
 
@@ -27,9 +29,12 @@ public:
     void cargarDatos();
     void setProducto(Productos *newProducto);
     void setInventario(Inventario *newInventario);
+    void setBitacoraForm(BitacoraForm *bitacoraForm);
 
 signals:
     void productoSeleccionado(Productos *producto);
+    void enviarDatosBitacora(const QDateTime& fecha, const QString& accion, int unidades, const QString& producto, float precioCompra, int existencias);
+
 private slots:
     void on_buttonBox_accepted();
 
@@ -42,6 +47,7 @@ private:
     QList<Productos *> *m_productos;
     Productos *m_producto;
     Inventario *m_inventario;
+    BitacoraForm *m_bitacoraForm;
 };
 
 #endif // INGRESOFORM_H
