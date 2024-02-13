@@ -32,6 +32,7 @@ public:
     void guardar();
     void cargar();
 
+
 public slots:
     void actualizarTabla();
 private slots:

@@ -17,12 +17,28 @@ float Inventario::calcularCosto(QString SKU, float nuevoCosto, float nuevaUnidad
         if (p->SKU() == SKU)
         {
 
-            nuevoCosto = ((p->precioCompra() * p->existencias()) + (nuevoCosto * nuevaUnidad)) / (p->existencias() + nuevaUnidad);
-            float total = nuevoCosto;
+            float total = ((p->precioCompra() * p->existencias()) + (nuevoCosto * nuevaUnidad)) / (p->existencias() + nuevaUnidad);
+
             return total;
         }
     }
     return 0;
+}
+
+
+QString Inventario::obtenerDatosFormateados() const
+{
+    QString datos;
+
+    foreach (Productos *producto, m_productos)
+    {
+        datos += producto->SKU() + ",";
+        datos += producto->nombre() + ",";
+        datos += QString::number(producto->precioCompra()) + ",";
+        datos += QString::number(producto->existencias()) + "\n";
+    }
+
+    return datos;
 }
 
 float Inventario::calcularEgreso(QString SKU, float nuevaUnidad)
@@ -42,7 +58,7 @@ float Inventario::calcularEgreso(QString SKU, float nuevaUnidad)
     return 0;
 }
 
-QList<Productos *> Inventario::obtenerProductos()
+QList<Productos *> Inventario::obtenerProductos() const
 {
     return m_productos;
 }

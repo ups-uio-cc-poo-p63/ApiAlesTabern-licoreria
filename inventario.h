@@ -12,7 +12,8 @@ public:
     void agregarProductos(Productos *nuevoProducto);
     float calcularCosto(QString SKU, float nuevoCosto, float nuevaUnidad);
     float calcularEgreso(QString SKU, float nuevaUnidad);
-    QList<Productos*> obtenerProductos();
+    QList<Productos*> obtenerProductos() const;
+    QString obtenerDatosFormateados() const;
 private:
     QList <Productos*> m_productos;
 };

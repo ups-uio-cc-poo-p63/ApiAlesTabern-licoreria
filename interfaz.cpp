@@ -31,7 +31,7 @@ void Interfaz::actualizarTabla()
 
     QList<Productos*> productos = inventario->obtenerProductos();
 
-    foreach (Productos *producto, m_productos)
+    foreach (Productos *producto, productos)
     {
         QString sku = producto->SKU();
         QString nombre = producto->nombre();
@@ -117,6 +117,11 @@ void Interfaz::datosQuemados()
     m_productos.append(p3);
     m_productos.append(p4);
 
+    inventario->agregarProductos(p1);
+    inventario->agregarProductos(p2);
+    inventario->agregarProductos(p3);
+    inventario->agregarProductos(p4);
+
 }
 
 void Interfaz::setBitacoraForm(BitacoraForm *newBitacoraForm)
@@ -140,13 +145,8 @@ void Interfaz::guardar()
             salida << tr("SKU,Nombre,PrecioCompra,Existencias\n");
 
             // Escribir datos
-            foreach (Productos *producto, m_productos)
-            {
-                salida << producto->SKU() << ","
-                       << producto->nombre() << ","
-                       << producto->precioCompra() << ","
-                       << producto->existencias() << "\n";
-            }
+
+            salida << inventario->obtenerDatosFormateados();
 
             archivo.close();
         }
@@ -156,6 +156,7 @@ void Interfaz::guardar()
         }
     }
 }
+
 
 void Interfaz::cargar()
 {
@@ -184,7 +185,8 @@ void Interfaz::cargar()
                     int existencias = campos[3].toInt();
 
                     Productos *producto = new Productos(sku, nombre, precioCompra, existencias);
-                    m_productos.append(producto);
+                    inventario->agregarProductos(producto);
+                    // m_productos.append(producto);
                 }
             }
             datosQuemados();
