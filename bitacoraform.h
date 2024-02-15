@@ -4,6 +4,9 @@
 #include <QWidget>
 #include <QDialog>
 #include <QDateTime>
+#include <QString>
+
+#include <bitacora.h>
 
 namespace Ui {
 class BitacoraForm;
@@ -16,11 +19,8 @@ class BitacoraForm : public QDialog
 public:
     explicit BitacoraForm(QWidget *parent = nullptr);
     ~BitacoraForm();
-    void actualizarTabla(const QDateTime& fecha, const QString& accion, int unidades, const QString& producto, float precioCompra, int existencias);
-    void agregarFilaTabla(const QDateTime& fecha, const QString& accion, int unidades, const QString& producto, float precioCompra, int existencias);
 
 private slots:
-    void on_cmbProductos_currentIndexChanged(int index);
 
 private:
     Ui::BitacoraForm *ui;

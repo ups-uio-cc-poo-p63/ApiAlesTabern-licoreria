@@ -8,7 +8,7 @@ Interfaz::Interfaz(QWidget *parent)
 
     ui->tblDatos->setColumnCount(4);
     QStringList tituloTemas;
-    tituloTemas << "SKU" << "Nombre" << "Precio Compra" << "Existencias";
+    tituloTemas << tr("SKU") << tr("Nombre") << tr("Precio Compra") << tr("Existencias");
     ui->tblDatos->setHorizontalHeaderLabels(tituloTemas);
     inventario = new Inventario();
     datosQuemados();
@@ -73,7 +73,6 @@ void Interfaz::on_actionIngreso_triggered()
     IngresoForm *w = new IngresoForm(this);
     w->setProductos(m_productos);
     w->setInventario(inventario);
-    w->setBitacoraForm(m_bitacoraForm);
     w->cargarProductos();
 
     connect(w, SIGNAL(productoSeleccionado(Productos*)), this, SLOT(on_productoSeleccionado(Productos*)));
@@ -107,26 +106,24 @@ void Interfaz::on_actionBitacora_triggered()
 
 void Interfaz::datosQuemados()
 {
-    Productos *p1 = new Productos("SKU-1", "Pilsener", 5.00, 10);
-    Productos *p2 = new Productos("SKU-2", "Corona", 20.00, 20);
-    Productos *p3 = new Productos("SKU-3", "Club", 10.00, 30);
-    Productos *p4 = new Productos("SKU-4", "Blue Label", 40.00, 35);
+    if (inventario->obtenerProductos().isEmpty())
+    {
+        Productos *p1 = new Productos("SKU-1", "Pilsener", 5.00, 10);
+        Productos *p2 = new Productos("SKU-2", "Corona", 20.00, 20);
+        Productos *p3 = new Productos("SKU-3", "Club", 10.00, 30);
+        Productos *p4 = new Productos("SKU-4", "Blue Label", 40.00, 35);
 
-    m_productos.append(p1);
-    m_productos.append(p2);
-    m_productos.append(p3);
-    m_productos.append(p4);
+        m_productos.append(p1);
+        m_productos.append(p2);
+        m_productos.append(p3);
+        m_productos.append(p4);
 
-    inventario->agregarProductos(p1);
-    inventario->agregarProductos(p2);
-    inventario->agregarProductos(p3);
-    inventario->agregarProductos(p4);
+        inventario->agregarProductos(p1);
+        inventario->agregarProductos(p2);
+        inventario->agregarProductos(p3);
+        inventario->agregarProductos(p4);
+    }
 
-}
-
-void Interfaz::setBitacoraForm(BitacoraForm *newBitacoraForm)
-{
-    m_bitacoraForm = newBitacoraForm;
 }
 
 void Interfaz::guardar()

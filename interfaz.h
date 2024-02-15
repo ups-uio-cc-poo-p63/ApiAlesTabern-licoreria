@@ -28,7 +28,6 @@ public:
     ~Interfaz();
     void cargarDatos();
     QList<Productos*>& obtenerListaProductos();
-    void setBitacoraForm(BitacoraForm *newBitacoraForm);
     void guardar();
     void cargar();
 
@@ -54,12 +53,9 @@ private:
 
     Inventario *inventario;
     QList<Productos*> m_productos;
-    BitacoraForm *m_bitacoraForm;
 
     void datosQuemados();
 
-    QString m_path;
-    QString m_archivo;
     enum Columna
     {
         SKU, NOMBRE, PRECIOCOMPRA, EXISTENCIAS

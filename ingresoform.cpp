@@ -43,13 +43,13 @@ void IngresoForm::on_buttonBox_accepted()
 
     if(nuevasUnidades == 0)
     {
-        QMessageBox::critical(this, "Ingresar", "Las unidades no pueden quedar en 0");
+        QMessageBox::critical(this, tr("Ingresar"), tr("Las unidades no pueden quedar en 0"));
         ui->spnUnidades->setFocus();
         return;
     }
     else if(precioCompra == 0)
     {
-        QMessageBox::critical(this, "Ingresar", "El precio de compra debe ser diferente de 0");
+        QMessageBox::critical(this, tr("Ingresar"), tr("El precio de compra debe ser diferente de 0"));
         ui->spnPrecioCompra->setFocus();
         return;
     }
@@ -58,17 +58,14 @@ void IngresoForm::on_buttonBox_accepted()
         float nuevoPrecioCompra = m_inventario->calcularCosto(m_producto->SKU(), precioCompra, nuevasUnidades);
         m_producto->setExistencias(m_producto->existencias() + nuevasUnidades);
         m_producto->setPrecioCompra(nuevoPrecioCompra);
-        qDebug() << "sigue aqui";
+        qDebug() << tr("sigue aqui");
         QDateTime fechaAccion = QDateTime::currentDateTime();
         QString fecha = fechaAccion.toString("yyyy-MM-dd hh:mm:ss");
 
         emit productoSeleccionado(m_producto);
-        emit enviarDatosBitacora(fechaAccion, "Ingreso", nuevasUnidades, m_producto->nombre(), nuevoPrecioCompra, m_producto->existencias());
 
         this->close();
     }
-
-
 }
 
 void IngresoForm::setProducto(Productos *newProducto)
@@ -93,10 +90,5 @@ void IngresoForm::setInventario(Inventario *newInventario)
 void IngresoForm::on_buttonBox_rejected()
 {
     this->close();
-}
-
-void IngresoForm::setBitacoraForm(BitacoraForm *newBitacoraForm)
-{
-    m_bitacoraForm = newBitacoraForm;
 }
 

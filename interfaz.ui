@@ -13,6 +13,9 @@
   <property name="windowTitle">
    <string>Interfaz</string>
   </property>
+  <property name="styleSheet">
+   <string notr="true">background-color: rgb(193, 252, 255);</string>
+  </property>
   <widget class="QWidget" name="centralwidget">
    <layout class="QGridLayout" name="gridLayout">
     <item row="1" column="1">
@@ -30,6 +33,15 @@
     </item>
     <item row="1" column="0">
      <widget class="QPushButton" name="pushButton">
+      <property name="font">
+       <font>
+        <bold>true</bold>
+       </font>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">color: rgb(0, 0, 0);
+background-color: rgb(255, 255, 255);</string>
+      </property>
       <property name="text">
        <string>Guardar</string>
       </property>
@@ -37,6 +49,15 @@
     </item>
     <item row="1" column="2">
      <widget class="QPushButton" name="pushButton_2">
+      <property name="font">
+       <font>
+        <bold>true</bold>
+       </font>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">color: rgb(0, 0, 0);
+background-color: rgb(255, 255, 255);</string>
+      </property>
       <property name="text">
        <string>Cargar Nuevo</string>
       </property>
@@ -71,6 +92,11 @@
     <addaction name="actionSalir"/>
    </widget>
    <widget class="QMenu" name="menuKardex">
+    <property name="font">
+     <font>
+      <bold>true</bold>
+     </font>
+    </property>
     <property name="title">
      <string>Kardex</string>
     </property>
@@ -79,10 +105,14 @@
    <addaction name="menuArchivo"/>
    <addaction name="menuKardex"/>
   </widget>
-  <widget class="QStatusBar" name="statusbar"/>
   <action name="actionNuevo_Producto">
    <property name="text">
     <string>&amp;Nuevo Producto</string>
+   </property>
+   <property name="font">
+    <font>
+     <bold>true</bold>
+    </font>
    </property>
    <property name="shortcut">
     <string>Ctrl+N</string>

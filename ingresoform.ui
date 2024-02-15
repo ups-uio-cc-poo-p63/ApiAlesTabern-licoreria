@@ -13,12 +13,34 @@
   <property name="windowTitle">
    <string>Form</string>
   </property>
+  <property name="styleSheet">
+   <string notr="true">background-color: rgb(193, 252, 255);</string>
+  </property>
   <layout class="QGridLayout" name="gridLayout">
    <item row="3" column="2">
-    <widget class="QDoubleSpinBox" name="spnPrecioCompra"/>
+    <widget class="QDoubleSpinBox" name="spnPrecioCompra">
+     <property name="font">
+      <font>
+       <bold>true</bold>
+      </font>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">color: rgb(0, 0, 0);
+background-color: rgb(255, 255, 255);</string>
+     </property>
+    </widget>
    </item>
    <item row="0" column="0">
     <widget class="QLabel" name="label">
+     <property name="font">
+      <font>
+       <bold>true</bold>
+      </font>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">
+color: rgb(0, 0, 255);</string>
+     </property>
      <property name="text">
       <string>Productos:</string>
      </property>
@@ -26,16 +48,44 @@
    </item>
    <item row="1" column="0">
     <widget class="QLabel" name="label_2">
+     <property name="font">
+      <font>
+       <bold>true</bold>
+      </font>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">
+color: rgb(0, 0, 255);</string>
+     </property>
      <property name="text">
       <string>Existencias:</string>
      </property>
     </widget>
    </item>
    <item row="2" column="2">
-    <widget class="QSpinBox" name="spnUnidades"/>
+    <widget class="QSpinBox" name="spnUnidades">
+     <property name="font">
+      <font>
+       <bold>true</bold>
+      </font>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">color: rgb(0, 0, 0);
+background-color: rgb(255, 255, 255);</string>
+     </property>
+    </widget>
    </item>
    <item row="2" column="0">
     <widget class="QLabel" name="label_3">
+     <property name="font">
+      <font>
+       <bold>true</bold>
+      </font>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">
+color: rgb(0, 0, 255);</string>
+     </property>
      <property name="text">
       <string>Unidades:</string>
      </property>
@@ -43,6 +93,15 @@
    </item>
    <item row="3" column="0">
     <widget class="QLabel" name="label_4">
+     <property name="font">
+      <font>
+       <bold>true</bold>
+      </font>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">
+color: rgb(0, 0, 255);</string>
+     </property>
      <property name="text">
       <string>Precio Compra:</string>
      </property>
@@ -50,6 +109,15 @@
    </item>
    <item row="4" column="2">
     <widget class="QDialogButtonBox" name="buttonBox">
+     <property name="font">
+      <font>
+       <bold>true</bold>
+      </font>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">color: rgb(0, 0, 0);
+background-color: rgb(255, 255, 255);</string>
+     </property>
      <property name="standardButtons">
       <set>QDialogButtonBox::Cancel|QDialogButtonBox::Ok</set>
      </property>
@@ -69,10 +137,28 @@
     </spacer>
    </item>
    <item row="0" column="2">
-    <widget class="QComboBox" name="cmbProductos"/>
+    <widget class="QComboBox" name="cmbProductos">
+     <property name="font">
+      <font>
+       <bold>true</bold>
+      </font>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">color: rgb(0, 0, 0);
+background-color: rgb(255, 255, 255);</string>
+     </property>
+    </widget>
    </item>
    <item row="1" column="2">
     <widget class="QLabel" name="lblExistencias">
+     <property name="font">
+      <font>
+       <bold>true</bold>
+      </font>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">color: rgb(0, 0, 0);</string>
+     </property>
      <property name="text">
       <string>Desconocido</string>
      </property>

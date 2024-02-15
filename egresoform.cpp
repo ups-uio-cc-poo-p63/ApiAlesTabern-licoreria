@@ -57,22 +57,20 @@ void EgresoForm::on_buttonBox_accepted()
     int unidades = ui->spnUnidades->value();
     if(unidades == 0)
     {
-        QMessageBox::critical(this, "Egreso", "Las unidades no pueden estar en 0");
+        QMessageBox::critical(this, tr("Egreso"), tr("Las unidades no pueden estar en 0"));
         ui->spnUnidades->setFocus();
         return;
     }
     if(unidades > m_producto->existencias())
     {
-        QMessageBox::warning(this, "Egreso", "El egreso no puede ser superior a las unidades ya existentes");
+        QMessageBox::warning(this, tr("Egreso"), tr("El egreso no puede ser superior a las unidades ya existentes"));
         ui->spnUnidades->clear();
         ui->spnUnidades->setFocus();
         return;
     }
     int nuevaUnidad = m_inventario->calcularEgreso(m_producto->SKU(), unidades);
     m_producto->setExistencias(nuevaUnidad);
-
     emit productoSeleccionado(m_producto);
-
     this->close();
 }
 

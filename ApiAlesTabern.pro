@@ -9,6 +9,7 @@ CONFIG += c++11
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
+    bitacora.cpp \
     bitacoraform.cpp \
     egresoform.cpp \
     ingresoform.cpp \
@@ -19,6 +20,7 @@ SOURCES += \
     productos.cpp
 
 HEADERS += \
+    bitacora.h \
     bitacoraform.h \
     egresoform.h \
     ingresoform.h \
@@ -33,6 +35,12 @@ FORMS += \
     ingresoform.ui \
     interfaz.ui \
     nuevoproductoform.ui
+
+TRANSLATIONS += \
+
+    en.ts
+    it.ts
+
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin
