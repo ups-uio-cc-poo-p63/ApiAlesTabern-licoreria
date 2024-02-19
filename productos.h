@@ -1,8 +1,8 @@
+// Archivo productos.h
 #ifndef PRODUCTOS_H
 #define PRODUCTOS_H
 
 #include <QString>
-
 
 class Productos
 {

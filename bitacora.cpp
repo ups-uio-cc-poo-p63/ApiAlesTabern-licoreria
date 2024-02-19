@@ -1,17 +1,38 @@
+// Archivo bitacora.cpp
 #include "bitacora.h"
 
-Bitacora::Bitacora()
-{
+Bitacora::Bitacora() : m_producto(nullptr) {}
 
+Bitacora::Bitacora(const QString &SKU, float cantidad, bool esIngreso)
+    : m_SKU(SKU), m_cantidad(cantidad), m_esIngreso(esIngreso), m_fechaHora(QDateTime::currentDateTime()), m_producto(nullptr)
+{}
+
+const QString &Bitacora::SKU() const
+{
+    return m_SKU;
 }
 
-void Bitacora::agregarEntrada(const QString &descripcion)
+float Bitacora::cantidad() const
 {
-    QString entrada = QDateTime::currentDateTime().toString("yyyy-MM-dd hh:mm:ss") + " | " + descripcion;
-    historial.append(entrada);
+    return m_cantidad;
 }
 
-QStringList Bitacora::obtenerHistorial() const
+bool Bitacora::esIngreso() const
 {
-    return historial;
+    return m_esIngreso;
+}
+
+const QDateTime &Bitacora::fechaHora() const
+{
+    return m_fechaHora;
+}
+
+Productos *Bitacora::producto() const
+{
+    return m_producto;
+}
+
+void Bitacora::setProducto(Productos *producto)
+{
+    m_producto = producto;
 }

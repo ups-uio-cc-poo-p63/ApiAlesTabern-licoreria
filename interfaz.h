@@ -14,6 +14,8 @@
 #include <ingresoform.h>
 #include <egresoform.h>
 #include <bitacoraform.h>
+#include <bitacora.h>
+#include <inventario.h>
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class Interfaz; }

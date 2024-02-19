@@ -1,3 +1,4 @@
+// Archivo productos.cpp
 #include "productos.h"
 
 Productos::Productos() : m_precioCompra(0.0), m_existencias(0)

@@ -60,7 +60,9 @@ void Interfaz::on_productoAgregado(QString sku, QString nombre, double precioCom
     Productos *nuevoProducto = new Productos(sku, nombre, precioCompra, existencias);
     m_productos.append(nuevoProducto);
     inventario->agregarProductos(nuevoProducto);
+    //realizarOperacion(inventario, sku, existencias, true);
     actualizarTabla();
+
 }
 
 QList<Productos*>& Interfaz::obtenerListaProductos()
@@ -82,6 +84,17 @@ void Interfaz::on_actionIngreso_triggered()
 
 void Interfaz::on_productoSeleccionado(Productos *producto)
 {
+   /* float cantidad = calcularEgreso();
+    // Realizar la operación de ingreso en el inventario
+    float nuevasExistencias = inventario->calcularCosto(producto->SKU(), producto->precioCompra(), cantidad);
+    realizarOperacion(inventario, producto->SKU(), cantidad, true);
+    float Cantidad = obtenerCantidadEgresada(); // Esta función debería obtener la cantidad egresada por el usuario
+
+    // Realizar la operación de egreso en el inventario
+    float NuevasExistencias = inventario->calcularEgreso(producto->SKU(), cantidad);
+
+    // Agregar el registro de la bitácora para la operación de egreso
+    realizarOperacion(inventario, producto->SKU(), cantidad, false);*/
     actualizarTabla();
 }
 
@@ -100,8 +113,8 @@ void Interfaz::on_actionEgreso_triggered()
 
 void Interfaz::on_actionBitacora_triggered()
 {
-    BitacoraForm *w = new BitacoraForm(this);
-    w->show();
+    BitacoraForm *bitacoraForm = new BitacoraForm(nullptr, inventario);
+    bitacoraForm->show();
 }
 
 void Interfaz::datosQuemados()
@@ -196,6 +209,7 @@ void Interfaz::cargar()
         }
     }
 }
+
 
 void Interfaz::on_pushButton_released()
 {

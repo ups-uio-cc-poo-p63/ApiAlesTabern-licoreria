@@ -1,35 +1,76 @@
+// Archivo inventario.cpp
 #include "inventario.h"
 
-Inventario::Inventario()
-{
-
-}
+Inventario::Inventario() {}
 
 void Inventario::agregarProductos(Productos *nuevoProducto)
 {
     m_productos.append(nuevoProducto);
 }
 
-float Inventario::calcularCosto(QString SKU, float nuevoCosto, float nuevaUnidad)
+float Inventario::calcularCosto(const QString &SKU, float nuevoCosto, float nuevaUnidad)
 {
     foreach (Productos *p, m_productos)
     {
         if (p->SKU() == SKU)
         {
-
+            // Realizar los cálculos
             float total = ((p->precioCompra() * p->existencias()) + (nuevoCosto * nuevaUnidad)) / (p->existencias() + nuevaUnidad);
 
+            // Actualizar el precio de compra y las existencias del producto
+            p->setPrecioCompra(total);
+            // p->setExistencias(p->existencias() + nuevaUnidad);
+
+            // Registrar la operación en el historial
+            m_historial.append(Bitacora(SKU, nuevaUnidad, true));
+
+            // Emitir la señal de operación realizada
+            emit operacionRealizada(SKU, nuevaUnidad, true);
+
+            // Devolver el resultado de los cálculos
             return total;
         }
     }
-    return 0;
+
 }
 
+
+
+float Inventario::calcularEgreso(const QString &SKU, float nuevaUnidad)
+{
+    foreach (Productos *p, m_productos)
+    {
+        if (p->SKU() == SKU)
+        {
+            if (p->existencias() >= nuevaUnidad)
+            {
+                // Reducir las existencias del producto
+                p->setExistencias(p->existencias() - nuevaUnidad);
+
+                // Registrar la operación en el historial
+                m_historial.append(Bitacora(SKU, nuevaUnidad, false));
+
+                // Emitir la señal de operación realizada
+                emit operacionRealizada(SKU, nuevaUnidad, false);
+
+                // Realizar los cálculos
+                float total = p->existencias(); // Aquí mantienes la fórmula del segundo código
+
+                // Devolver el resultado de los cálculos
+                return total;
+            }
+        }
+    }
+}
+
+QList<Productos*> Inventario::obtenerProductos() const
+{
+    return m_productos;
+}
 
 QString Inventario::obtenerDatosFormateados() const
 {
     QString datos;
-
     foreach (Productos *producto, m_productos)
     {
         datos += producto->SKU() + ",";
@@ -41,25 +82,26 @@ QString Inventario::obtenerDatosFormateados() const
     return datos;
 }
 
-float Inventario::calcularEgreso(QString SKU, float nuevaUnidad)
+QList<Bitacora> Inventario::obtenerHistorial() const
 {
-    foreach (Productos *p, m_productos)
+    return m_historial;
+}
+
+Productos *Inventario::buscarProducto(const QString &SKU)
+{
+    for (Productos *producto : m_productos)
     {
-        if(p->SKU() == SKU)
+        if (producto->SKU() == SKU)
         {
-            if(p->existencias() >= nuevaUnidad)
-            {
-                float total = p->existencias() - nuevaUnidad;
-                p->setExistencias(total);
-                return total;
-            }
+            return producto;
         }
     }
-    return 0;
+    return nullptr;
 }
 
-QList<Productos *> Inventario::obtenerProductos() const
+void Inventario::operacionRealizada(const QString &SKU, float cantidad, bool esIngreso)
 {
-    return m_productos;
+    // Aquí puedes agregar la lógica que necesites para manejar la señal
+    // Por ejemplo, podrías imprimir un mensaje indicando la operación realizada
+    qDebug() << "Operación realizada - SKU:" << SKU << ", Cantidad:" << cantidad << ", Es ingreso:" << esIngreso;
 }
-

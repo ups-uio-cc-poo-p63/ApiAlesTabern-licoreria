@@ -66,6 +66,7 @@ void IngresoForm::on_buttonBox_accepted()
 
         this->close();
     }
+
 }
 
 void IngresoForm::setProducto(Productos *newProducto)

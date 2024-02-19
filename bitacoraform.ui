@@ -17,39 +17,10 @@
    <string notr="true">background-color: rgb(193, 252, 255);</string>
   </property>
   <layout class="QGridLayout" name="gridLayout">
-   <item row="1" column="1">
-    <widget class="QComboBox" name="cmbProductos">
-     <property name="font">
-      <font>
-       <bold>true</bold>
-      </font>
-     </property>
-     <property name="styleSheet">
-      <string notr="true">color: rgb(0, 0, 0);
-background-color: rgb(255, 255, 255);</string>
-     </property>
-    </widget>
-   </item>
-   <item row="3" column="0" colspan="4">
+   <item row="1" column="0" colspan="2">
     <widget class="QTableWidget" name="tblBitacora"/>
    </item>
-   <item row="1" column="2">
-    <widget class="QRadioButton" name="rbtnEgreso">
-     <property name="font">
-      <font>
-       <bold>true</bold>
-      </font>
-     </property>
-     <property name="styleSheet">
-      <string notr="true">
-color: rgb(0, 0, 255);</string>
-     </property>
-     <property name="text">
-      <string>Egreso</string>
-     </property>
-    </widget>
-   </item>
-   <item row="1" column="3">
+   <item row="0" column="1">
     <widget class="QPushButton" name="btnGrafica">
      <property name="font">
       <font>
@@ -65,58 +36,10 @@ background-color: rgb(255, 255, 255);</string>
      </property>
     </widget>
    </item>
-   <item row="0" column="2">
-    <widget class="QRadioButton" name="rbtnIngreso">
-     <property name="font">
-      <font>
-       <italic>false</italic>
-       <bold>true</bold>
-      </font>
-     </property>
-     <property name="styleSheet">
-      <string notr="true">
-color: rgb(0, 0, 255);</string>
-     </property>
+   <item row="0" column="0">
+    <widget class="QPushButton" name="btnHistorial">
      <property name="text">
-      <string>Ingreso</string>
-     </property>
-    </widget>
-   </item>
-   <item row="1" column="0">
-    <widget class="QLabel" name="label">
-     <property name="sizeIncrement">
-      <size>
-       <width>0</width>
-       <height>9</height>
-      </size>
-     </property>
-     <property name="font">
-      <font>
-       <bold>true</bold>
-      </font>
-     </property>
-     <property name="styleSheet">
-      <string notr="true">
-color: rgb(0, 0, 255);</string>
-     </property>
-     <property name="text">
-      <string>Producto:</string>
-     </property>
-    </widget>
-   </item>
-   <item row="2" column="0">
-    <widget class="QLabel" name="lblInfo">
-     <property name="font">
-      <font>
-       <bold>true</bold>
-      </font>
-     </property>
-     <property name="styleSheet">
-      <string notr="true">
-color: rgb(0, 0, 255);</string>
-     </property>
-     <property name="text">
-      <string>Datos</string>
+      <string>Mostrar Historial</string>
      </property>
     </widget>
    </item>
